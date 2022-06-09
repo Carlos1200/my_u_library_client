@@ -7,6 +7,7 @@ interface Route {
   path: string;
   Component: JSXComponent;
   name: string;
+  nested?: Route[];
 }
 
 export const routes: Route[] = [
