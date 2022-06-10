@@ -37,10 +37,12 @@ export const Home = () => {
               <Spinner />
             </div>
           ) : (
-            <div className="grid-books mx-6">
-              {books.map((book) => (
-                <Book key={book.id} book={book} />
-              ))}
+            <div className="text-center">
+              <div className="grid-books">
+                {books.map((book) => (
+                  <Book key={book.id} book={book} />
+                ))}
+              </div>
             </div>
           )}
         </div>

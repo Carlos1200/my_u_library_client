@@ -4,7 +4,12 @@
 
 .grid-books{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 1rem;
     margin-top: 1rem;
+    justify-items: center;
+}
+
+.min-with-150{
+    min-width: 300px;
 }
