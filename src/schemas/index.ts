@@ -23,3 +23,10 @@ export const BookSchema = Yup.object({
     .required("Required"),
   genreId: Yup.array().min(1, "Must be at least 1 genre").required("Required"),
 });
+
+export const UserSchema = Yup.object({
+  first_name: Yup.string().required("Required"),
+  last_name: Yup.string().required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  role: Yup.string().oneOf(["Librarian", "Student"]).required("Required"),
+});

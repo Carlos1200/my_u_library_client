@@ -2,6 +2,8 @@ import {
   faBook,
   faBookmark,
   faCirclePlus,
+  faDoorClosed,
+  faKey,
   faUser,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +20,7 @@ export const Sidebar = () => {
         <div className="mx-4 flex justify-center">
           <div className="pt-5 flex flex-col gap-y-3">
             <IconLink to="/" icon={faBook} />
+            <IconLink to="/user/password" icon={faKey} />
             {user.role === "Librarian" && (
               <>
                 <IconLink to="/books/new" icon={faCirclePlus} />
@@ -26,6 +29,7 @@ export const Sidebar = () => {
                 <IconLink to="/user/new" icon={faUsers} />
               </>
             )}
+            <IconLink to="/login" icon={faDoorClosed} logout />
           </div>
         </div>
       </div>

@@ -5,19 +5,24 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 interface IconLinkProps {
   to: string;
   icon: IconProp;
+  logout?: boolean;
 }
 
-export const IconLink = ({ to, icon }: IconLinkProps) => {
+export const IconLink = ({ to, icon, logout }: IconLinkProps) => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  };
   return (
     <NavLink
       to={to}
+      onClick={logout ? handleLogout : undefined}
       className={({ isActive }) =>
         `text-4xl text-white hover:text-gray-400 transition-colors duration-200 ease-in-out ${
           isActive && "text-gray-400"
         }`
       }
     >
-      <FontAwesomeIcon icon={icon} className="" />
+      <FontAwesomeIcon icon={icon} />
     </NavLink>
   );
 };

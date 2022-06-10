@@ -1,5 +1,5 @@
 import api from "../api";
-import { Book, BookIdResponse, BookResponse } from "../interfaces";
+import { BookIdResponse, BookResponse } from "../interfaces";
 
 interface BookProp {
   title: string;

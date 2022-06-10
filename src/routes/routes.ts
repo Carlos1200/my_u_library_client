@@ -1,4 +1,11 @@
-import { Home, Login, BookDetail, BookForm, UserForm } from "../pages";
+import {
+  Home,
+  Login,
+  BookDetail,
+  BookForm,
+  UserForm,
+  ChangePassword,
+} from "../pages";
 import { AuthorForm } from "../pages/AuthorForm";
 import { GenreForm } from "../pages/GenreForm";
 
@@ -53,5 +60,11 @@ export const routes: Route[] = [
     path: "/user/new",
     Component: UserForm,
     name: "New User",
+  },
+  {
+    to: "/user/password",
+    path: "/user/password",
+    Component: ChangePassword,
+    name: "Change Password",
   },
 ];
