@@ -1,6 +1,8 @@
 import { Formik, Form } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../atoms";
 import { MyTextInput } from "../components";
 import { LoginSchema } from "../schemas";
 import { authenticate } from "../services/auth";
@@ -8,7 +10,7 @@ import { authenticate } from "../services/auth";
 export const Login = () => {
   const [message, setMessage] = useState<null | string>(null);
   const navigate = useNavigate();
-
+  const setUser = useSetRecoilState(userState);
   return (
     <div className="w-full h-screen bg-teal-600">
       <div className="flex items-center h-full w-full">
@@ -24,11 +26,12 @@ export const Login = () => {
                 onSubmit={async (values) => {
                   try {
                     const {
-                      data: { message, token },
+                      data: { message, token, user },
                     } = await authenticate(values);
                     if (token) {
                       localStorage.setItem("token", token);
                       setMessage(message);
+                      setUser(user);
 
                       setTimeout(() => {
                         setMessage(null);

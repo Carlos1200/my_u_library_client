@@ -1,11 +1,9 @@
 import { atom } from "recoil";
-import { Book } from "../interfaces";
+import { Book, User } from "../interfaces";
 
-export const userState = atom({
+export const userState = atom<User>({
   key: "userState",
-  default: {
-    user: null,
-  },
+  default: {} as User,
 });
 
 export const booksState = atom<Book[]>({

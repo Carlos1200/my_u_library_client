@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { booksState } from "../atoms";
 import { Book, Layout, SearchInput, Spinner } from "../components";
-import { getBooks } from "../services/books";
+import { filterBooks, getBooks } from "../services/books";
 
 export const Home = () => {
   const [books, setBooks] = useRecoilState(booksState);
@@ -21,11 +21,26 @@ export const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const searchBooks = async (value: string, type: string) => {
+    try {
+      setLoading(true);
+      const { data } = await filterBooks(
+        type === "title" ? value : null,
+        type === "author" ? value : null,
+        type === "genre" ? value : null
+      );
+      setBooks(data.books);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
   return (
     <Layout>
       <div className="mx-5 mt-7">
         <h1 className="text-center text-4xl font-serif">Reserve your books</h1>
-        <SearchInput />
+        <SearchInput callback={searchBooks} />
       </div>
       <div>
         <h2 className="text-center text-2xl font-serif mt-5">

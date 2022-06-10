@@ -1,5 +1,5 @@
 import api from "../api";
-import { LoginResponse } from "../interfaces/index";
+import { LoginResponse, UserResponse } from "../interfaces";
 
 export const authenticate = ({
   email,
@@ -9,4 +9,4 @@ export const authenticate = ({
   password: string;
 }) => api.post<LoginResponse>("/auth", { email, password });
 
-export const getAuth = () => api.get("/auth");
+export const getAuth = () => api.get<UserResponse>("/auth");

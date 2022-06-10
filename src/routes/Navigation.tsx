@@ -1,10 +1,14 @@
 import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { getAuth } from "../services/auth";
 import { routes } from "./routes";
+import { userState } from "../atoms/index";
 
 export const Navigation = () => {
   const navigate = useNavigate();
+
+  const setUser = useSetRecoilState(userState);
   useEffect(() => {
     verifyAuth();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -12,7 +16,8 @@ export const Navigation = () => {
 
   const verifyAuth = async () => {
     try {
-      await getAuth();
+      const { data } = await getAuth();
+      setUser(data.user);
     } catch (error) {
       navigate("/login");
     }
