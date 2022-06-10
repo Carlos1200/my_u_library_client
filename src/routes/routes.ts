@@ -1,4 +1,4 @@
-import { Home, Login } from "../pages";
+import { Home, Login, BookDetail } from "../pages";
 
 type JSXComponent = () => JSX.Element;
 
@@ -7,7 +7,6 @@ interface Route {
   path: string;
   Component: JSXComponent;
   name: string;
-  nested?: Route[];
 }
 
 export const routes: Route[] = [
@@ -22,5 +21,11 @@ export const routes: Route[] = [
     path: "/",
     Component: Home,
     name: "Home",
+  },
+  {
+    to: "/books/:id",
+    path: "/books/:id",
+    Component: BookDetail,
+    name: "Books",
   },
 ];

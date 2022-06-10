@@ -1,9 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import { Navigation } from "./routes/Navigation";
 function App() {
   return (
     <BrowserRouter>
-      <Navigation />
+      <RecoilRoot>
+        <Navigation />
+      </RecoilRoot>
     </BrowserRouter>
   );
 }
