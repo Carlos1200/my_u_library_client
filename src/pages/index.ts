@@ -6,4 +6,5 @@ export { ChangePassword } from "./ChangePassword";
 export { GenreForm } from "./GenreForm";
 export { Home } from "./Home";
 export { Login } from "./Login";
+export { Page404 } from "./Page404";
 export { UserForm } from "./UserForm";

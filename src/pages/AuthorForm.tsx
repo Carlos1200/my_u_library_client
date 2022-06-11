@@ -9,7 +9,7 @@ export const AuthorForm = () => {
   return (
     <Layout>
       <div className="mx-5 mt-7">
-        <h1 className="text-center text-4xl font-serif">New Book</h1>
+        <h1 className="text-center text-4xl font-serif">New Author</h1>
         <div>
           <div className="mt-5 bg-teal-300 px-4 py-5 rounded-md w-11/12 sm:w-9/12 md:w-1/2 lg:w-1/3 xl:w-1/4 shadow-md mx-auto">
             <Formik
