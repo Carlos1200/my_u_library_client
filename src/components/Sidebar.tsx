@@ -16,7 +16,7 @@ export const Sidebar = () => {
   const user = useRecoilValue(userState);
 
   return (
-    <div className="col-span-1">
+    <div className="col-span-2 md:col-span-1">
       <div className="bg-teal-600 h-screen">
         <div className="mx-4 flex justify-center">
           <div className="pt-5 flex flex-col gap-y-3">
