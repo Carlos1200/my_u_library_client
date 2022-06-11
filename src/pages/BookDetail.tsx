@@ -40,6 +40,9 @@ export const BookDetail = () => {
       })
       .catch(() => {
         setError("Error borrowing book");
+        setTimeout(() => {
+          setError(null);
+        }, 1500);
       });
   };
 
