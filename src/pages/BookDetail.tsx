@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
 import { Layout, Spinner } from "../components";
 import { useEffect, useState } from "react";
-import { getBook } from "../services/books";
+import { borrowBook, getBook } from "../services/books";
 import { Book } from "../interfaces";
 import image from "../assets/library.jpg";
 
 export const BookDetail = () => {
   const { id } = useParams();
   const [book, setBook] = useState<Book | null>(null);
+  const [stock, setStock] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
   useEffect(() => {
@@ -18,7 +19,13 @@ export const BookDetail = () => {
   const getBooks = async () => {
     try {
       const { data } = await getBook(id as string);
-      setBook(data.book);
+      const book = {
+        ...data.book,
+        author: [...new Set(data.book.author)],
+        genre: [...new Set(data.book.genre)],
+      };
+      setBook(book);
+      setStock(data.book.stock || 0);
     } catch (error) {
       setError("Error getting book");
     } finally {
@@ -26,17 +33,15 @@ export const BookDetail = () => {
     }
   };
 
-  useEffect(() => {
-    if (book) {
-      setBook((prev) => {
-        return {
-          ...(prev as Book),
-          author: [...new Set(prev?.author)],
-          genre: [...new Set(prev?.genre)],
-        };
+  const checkout = () => {
+    borrowBook(id as string)
+      .then(() => {
+        setStock((prev) => prev - 1);
+      })
+      .catch(() => {
+        setError("Error borrowing book");
       });
-    }
-  }, [book]);
+  };
 
   return (
     <Layout>
@@ -91,12 +96,13 @@ export const BookDetail = () => {
                 <p className="text-xl font-serif text-center font-bold">
                   Stock:
                 </p>
-                <p className="text-xl font-serif text-center mb-2">
-                  {book.stock}
-                </p>
+                <p className="text-xl font-serif text-center mb-2">{stock}</p>
               </div>
               <div className="w-11/12 sm:w-9/12 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto md:mx-0">
-                <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 shadow-md shadow-blue-700 px-4 rounded-md ">
+                <button
+                  onClick={() => checkout()}
+                  className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 shadow-md shadow-blue-700 px-4 rounded-md "
+                >
                   Check out
                 </button>
               </div>

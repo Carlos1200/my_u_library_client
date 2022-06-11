@@ -1,5 +1,5 @@
 import api from "../api";
-import { BookIdResponse, BookResponse } from "../interfaces";
+import { BookIdResponse, BookResponse, BorrowedResponse } from "../interfaces";
 
 interface BookProp {
   title: string;
@@ -29,3 +29,12 @@ export const filterBooks = async (
 
 export const createBook = async (book: BookProp) =>
   api.post<BookIdResponse>("/books", book);
+
+export const borrowBook = async (id: string) =>
+  api.put<BookIdResponse>(`/books/borrow/${id}`);
+
+export const getBorrowBooks = async () =>
+  api.get<BorrowedResponse>("/books/borrow");
+
+export const returnBook = async (id: string, userId: string) =>
+  api.put<BookIdResponse>(`/books/borrow/return/${id}`, { userId });

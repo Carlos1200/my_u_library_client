@@ -17,7 +17,7 @@ export const IconLink = ({ to, icon, logout }: IconLinkProps) => {
       to={to}
       onClick={logout ? handleLogout : undefined}
       className={({ isActive }) =>
-        `text-4xl text-white hover:text-gray-400 transition-colors duration-200 ease-in-out ${
+        `text-4xl mx-auto text-white hover:text-gray-400 transition-colors duration-200 ease-in-out ${
           isActive && "text-gray-400"
         }`
       }

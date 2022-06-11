@@ -1,6 +1,7 @@
 import {
   faBook,
   faBookmark,
+  faBookReader,
   faCirclePlus,
   faDoorClosed,
   faKey,
@@ -24,6 +25,7 @@ export const Sidebar = () => {
             {user.role === "Librarian" && (
               <>
                 <IconLink to="/books/new" icon={faCirclePlus} />
+                <IconLink to="/books/borrowed" icon={faBookReader} />
                 <IconLink to="/authors/new" icon={faUser} />
                 <IconLink to="/genre/new" icon={faBookmark} />
                 <IconLink to="/user/new" icon={faUsers} />

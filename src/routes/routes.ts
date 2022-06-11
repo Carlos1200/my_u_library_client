@@ -5,6 +5,7 @@ import {
   BookForm,
   UserForm,
   ChangePassword,
+  BorrowBook,
 } from "../pages";
 import { AuthorForm } from "../pages/AuthorForm";
 import { GenreForm } from "../pages/GenreForm";
@@ -36,6 +37,12 @@ export const routes: Route[] = [
     path: "/books/new",
     Component: BookForm,
     name: "New Book",
+  },
+  {
+    to: "/books/borrowed",
+    path: "/books/borrowed",
+    Component: BorrowBook,
+    name: "Borrowed Books",
   },
   {
     to: "/books/:id",
