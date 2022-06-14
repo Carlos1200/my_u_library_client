@@ -1,13 +1,10 @@
 import api from "../api";
-import { BookIdResponse, BookResponse, BorrowedResponse } from "../interfaces";
-
-interface BookProp {
-  title: string;
-  published_year: number;
-  stock: number;
-  authorId: string[];
-  genreId: string[];
-}
+import {
+  BookFormProp,
+  BookIdResponse,
+  BookResponse,
+  BorrowedResponse,
+} from "../interfaces";
 
 export const getBooks = async () => api.get<BookResponse>("/books");
 
@@ -27,7 +24,7 @@ export const filterBooks = async (
   return api.get<BookResponse>(`/books/filter?${query.toString()}`);
 };
 
-export const createBook = async (book: BookProp) =>
+export const createBook = async (book: BookFormProp) =>
   api.post<BookIdResponse>("/books", book);
 
 export const borrowBook = async (id: string) =>

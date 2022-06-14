@@ -1,13 +1,32 @@
+import { useState } from "react";
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useMutation } from "react-query";
 import { Layout, MyTextInput } from "../components";
 import { changePassword } from "../services/user";
-import { useState } from "react";
+import { ChangePasswordProps } from "../interfaces";
 
 export const ChangePassword = () => {
   const navigate = useNavigate();
   const [error, setError] = useState<null | string>(null);
+  const {
+    mutate,
+    isSuccess,
+    isError,
+    error: errorMutation,
+  } = useMutation((values: ChangePasswordProps) => {
+    return changePassword(values);
+  });
+
+  if (isSuccess) {
+    navigate("/");
+  }
+
+  if (isError) {
+    setError((errorMutation as any).message);
+  }
+
   return (
     <Layout>
       <div className="mx-5 mt-7">
@@ -26,19 +45,8 @@ export const ChangePassword = () => {
                   .min(6, "Password must be at least 6 characters")
                   .required("New password is required"),
               })}
-              onSubmit={({ oldPassword, newPassword }) => {
-                changePassword({ oldPassword, newPassword })
-                  .then(() => {
-                    navigate("/");
-                  })
-                  .catch((error) => {
-                    console.log({ error });
-
-                    setError("Old password is incorrect");
-                    setTimeout(() => {
-                      setError(null);
-                    }, 1500);
-                  });
+              onSubmit={(values) => {
+                mutate(values);
               }}
             >
               {() => (

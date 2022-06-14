@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import {
   faBook,
@@ -9,16 +9,25 @@ import {
 
 interface Props {
   callback: (value: string, type: string) => void;
+  state: Dispatch<
+    SetStateAction<{
+      value: string;
+      type: string;
+    }>
+  >;
 }
 
-export const SearchInput = ({ callback }: Props) => {
+export const SearchInput = ({ state }: Props) => {
   const [textValue, setTextValue] = useState("");
   const [type, setType] = useState("title");
 
   const debounceValue = useDebouncedValue(textValue);
 
   useEffect(() => {
-    callback(debounceValue, type);
+    state({
+      value: debounceValue,
+      type,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceValue]);
 

@@ -69,3 +69,16 @@ export interface Borrowed {
   iduser: string;
   idbook: string;
 }
+
+export interface ChangePasswordProps {
+  oldPassword: string;
+  newPassword: string;
+}
+
+export interface BookFormProp {
+  title: string;
+  published_year: number;
+  stock: number;
+  authorId: string[];
+  genreId: string[];
+}
