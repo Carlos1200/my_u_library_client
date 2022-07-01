@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { useQuery } from "react-query";
 import { booksState } from "../atoms";
-import { Book, Layout, SearchInput, Spinner } from "../components";
+import { Layout, SearchInput, Spinner, Table } from "../components";
 import { filterBooks } from "../services/books";
 
 export const Home = () => {
@@ -58,12 +58,39 @@ export const Home = () => {
               <Spinner />
             </div>
           ) : (
-            <div className="text-center">
-              <div className="grid-books">
-                {books.map((book) => (
-                  <Book key={book.id} book={book} />
-                ))}
-              </div>
+            <div className="text-center mx-4">
+              <Table
+                data={books as any}
+                columns={[
+                  {
+                    id: "id",
+                    name: "Id",
+                    hidden: true,
+                  },
+                  {
+                    name: "Title",
+                    id: "title",
+                  },
+                  {
+                    name: "Author",
+                    id: "author",
+                    data: (row) =>
+                      (row as any).author
+                        .map((author: any) => author)
+                        .join(", "),
+                  },
+                  {
+                    name: "Genre",
+                    id: "genre",
+                    data: (row) =>
+                      (row as any).genre.map((genre: any) => genre).join(", "),
+                  },
+                  {
+                    name: "Publication Date",
+                    id: "published_year",
+                  },
+                ]}
+              />
             </div>
           )}
         </div>
